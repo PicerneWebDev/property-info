@@ -247,7 +247,7 @@ class PropertyInfo {
 	
 
 	public function preg_admin_init() {
-		register_setting( 'prop-contact-group', 'prop-contact-info' );
+	/*	register_setting( 'prop-contact-group', 'prop-contact-info' );
 		add_settings_section( 'section-one', 'Property Contact Information', array( $this,'section_one_callback'), 'property-info' );
 		add_settings_field( 'addr-ln-one', 'Address Line 1', array( $this,'addr_ln_one_callback' ), 'property-info', 'section-one' );
 		add_settings_field( 'addr-ln-two', 'Address Line 2', array( $this,'addr_ln_two_callback' ), 'property-info', 'section-one' );
@@ -256,15 +256,28 @@ class PropertyInfo {
 		add_settings_field( 'zip', 'Zip', array( $this,'zip_callback' ), 'property-info', 'section-one' );
 		add_settings_field( 'phone', 'Phone #', array( $this, 'phone_callback' ), 'property-info', 'section-one' );
 		add_settings_field( 'fax', 'Fax #', array( $this, 'fax_callback' ), 'property-info', 'section-one' );	
+	*/	
+
 		
-		register_setting( 'prop-google-group', 'prop-google-settings' );
-		add_settings_section( 'google-section', 'Google Settings' , array( $this, 'google_section_callback'), 'property-info' );
-		add_settings_field( 'google-map-url', 'Google Map URL', array( $this, 'google_map_url_callback' ), 'property-info', 'google-section' );	
+		register_setting( 'prop-contact-group', 'prop-contact-info' );
+		add_settings_section( 'prop-contact-section', 'Property Contact Information' , array( $this, 'contact_section_callback'), 'property-info' );
+		
+		add_settings_field('prop-addr-ln-one', 'Address Line 1', array($this, 'addr_ln_one_callback' ), 'property-info', 'prop-contact-section' );
+		
+		add_settings_field('prop-addr-ln-two', 'Address Line 2', array($this, 'addr_ln_two_callback' ), 'property-info', 'prop-contact-section' );
+		
+		add_settings_field('prop-city', 'City', array($this, 'city_callback' ), 'property-info', 'prop-contact-section' );
+		
+		add_settings_field('prop-state', 'State', array($this, 'state_callback' ), 'property-info', 'prop-contact-section' );
+		
+		add_settings_field('prop-zip', 'Zip', array($this, 'zip_callback' ), 'property-info', 'prop-contact-section' );
+		
+		add_settings_field('prop-phone', 'Phone #', array($this, 'phone_callback' ), 'property-info', 'prop-contact-section' );
+		
+		add_settings_field('prop-fax', 'Fax #', array($this, 'fax_callback' ), 'property-info', 'prop-contact-section' );
+		
+		add_settings_field('prop-google-map-url', 'Google Map URL', array($this, 'google_map_url_callback'), 'property-info', 'prop-contact-section' );
 			
-		
-		register_setting( 'prop-yardi-group', 'prop-yardi-info' );
-		add_settings_section( 'yardi-section', 'Yardi Settings' , array( $this, 'yardi_section_callback'), 'property-info' );
-		add_settings_field( 'voy-prop-code', 'Property Code', array( $this, 'voy_prop_code_callback' ), 'property-info', 'yardi-section' );		
 		
 		
 	}
@@ -274,8 +287,8 @@ class PropertyInfo {
 	 *
 	 * @since    1.0.0
 	 */
-	public function section_one_callback() {
-		echo 'Some help text goes here.';
+	public function contact_callback() {
+		echo 'Enter in The Contact information below.';
 	}
 	
 	/**
@@ -283,8 +296,8 @@ class PropertyInfo {
 	 *
 	 * @since    1.0.0
 	 */
-	public function yardi_section_callback() {
-		echo 'Must be filled in correctly for RentCafe API to function correctly';
+	public function contact_section_callback() {
+		echo 'Please fill in the property contact information below.';
 	}	
 	
 	
@@ -306,8 +319,8 @@ class PropertyInfo {
 	public function addr_ln_one_callback() {
 		
 		$settings = (array) get_option( 'prop-contact-info' );
-        $addrOne = esc_attr( $settings['addrOne'] );
-		echo "<input type='text' name='prop-contact-info[addrOne]' value='$addrOne' />";
+        $addrLnOne = esc_attr( $settings['prop-addr-ln-one'] );
+		echo "<input type='text' name='prop-contact-info[prop-addr-ln-one]' value='$addrLnOne' />";
 	}
 	/**
 	 * Call Back For Address Line 2
@@ -317,8 +330,8 @@ class PropertyInfo {
 	public function addr_ln_two_callback() {
 		
 		$settings = (array) get_option( 'prop-contact-info' );
-        $addrTwo = esc_attr( $settings['addrTwo'] );
-		echo "<input type='text' name='prop-contact-info[addrTwo]' value='$addrTwo' />";
+        $addrLnTwo = esc_attr( $settings['prop-addr-ln-two'] );
+		echo "<input type='text' name='prop-contact-info[prop-addr-ln-two]' value='$addrLnTwo' />";
 	}	
 	
 	/**
@@ -329,8 +342,8 @@ class PropertyInfo {
 	public function city_callback() {
 		
 		$settings = (array) get_option( 'prop-contact-info' );
-        $city = esc_attr( $settings['city'] );
-		echo "<input type='text' name='prop-contact-info[city]' value='$city' />";
+        $city = esc_attr( $settings['prop-city'] );
+		echo "<input type='text' name='prop-contact-info[prop-city]' value='$city' />";
 	}		
 
 	/**
@@ -341,8 +354,8 @@ class PropertyInfo {
 	public function state_callback() {
 		
 		$settings = (array) get_option( 'prop-contact-info' );
-        $state = esc_attr( $settings['state'] );
-		echo "<input type='text' name='prop-contact-info[state]' value='$state' />";
+        $state = esc_attr( $settings['prop-state'] );
+		echo "<input type='text' name='prop-contact-info[prop-state]' value='$state' />";
 	}
 	
 	/**
@@ -353,8 +366,8 @@ class PropertyInfo {
 	public function zip_callback() {
 		
 		$settings = (array) get_option( 'prop-contact-info' );
-        $zip = esc_attr( $settings['zip'] );
-		echo "<input type='text' name='prop-contact-info[zip]' value='$zip' />";
+        $zip = esc_attr( $settings['prop-zip'] );
+		echo "<input type='text' name='prop-contact-info[prop-zip]' value='$zip' />";
 	}
 	
 	/**
@@ -365,9 +378,22 @@ class PropertyInfo {
 	public function phone_callback() {
 		
 		$settings = (array) get_option( 'prop-contact-info' );
-        $phone = esc_attr( $settings['phone'] );
-		echo "<input type='text' name='prop-contact-info[phone]' value='$phone' />";
+        $phone = esc_attr( $settings['prop-phone'] );
+		echo "<input type='text' name='prop-contact-info[prop-phone]' value='$phone' />";
 	}	
+	
+	/**
+	 *
+	 *
+	 *
+	 * @somce 1.0.0
+	 */
+	 public function fax_callback(){
+
+		$settings = (array) get_option( 'prop-contact-info' );
+        $fax = esc_attr( $settings['prop-fax'] );
+		echo "<input type='text' name='prop-contact-info[prop-fax]' value='$fax' />";		   
+	 }
 	
 	/**
 	 * Callback To Store The Property code
@@ -377,36 +403,9 @@ class PropertyInfo {
 	public function google_map_url_callback() {
 		
 		$settings = (array) get_option( 'prop-contact-info' );
-        $gMap = esc_attr( $settings['google-map-url'] );
-		echo "<input type='text' name='prop-contact-info[google-map-url]' value='$gMap' />";
+        $gMap = esc_attr( $settings['prop-google-map-url'] );
+		echo "<input type='text' name='prop-contact-info[prop-google-map-url]' value='$gMap' />";	
 	}	
-	
-	/**
-	 * Call Back For The Fax # Input
-	 *
-	 * @since    1.0.0
-	 */		
-	public function fax_callback() {
-		
-		$settings = (array) get_option( 'prop-contact-info' );
-        $fax = esc_attr( $settings['fax'] );
-		echo "<input type='text' name='prop-contact-info[fax]' value='$fax' />";
-	}		
-	
-	
-	
-	/**
-	 * Callback To Store The Property code
-	 *
-	 * @since    1.0.0
-	 */			
-	public function voy_prop_code_callback() {
-		
-		$settings = (array) get_option( 'prop-yardi-info' );
-        $propCode = esc_attr( $settings['voy-prop-code'] );
-		echo "<input type='text' name='prop-yardi-info[voy-prop-code]' value='$propCode' />";
-	}
-	
 	
 
 	/**
@@ -418,7 +417,6 @@ class PropertyInfo {
     ?>
         <form action="options.php" method="POST">
             <?php settings_fields( 'prop-contact-group' ); ?>
-            <?php settings_fields( 'prop-yardi-group' ); ?>
             <?php do_settings_sections( 'property-info' ); ?>
             <?php submit_button(); ?>
         </form>
