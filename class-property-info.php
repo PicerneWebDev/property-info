@@ -260,7 +260,7 @@ class PropertyInfo {
 
 		
 		register_setting( 'prop-contact-group', 'prop-contact-info' );
-		add_settings_section( 'prop-contact-section', 'Property Contact Information' , array( $this, 'contact_section_callback'), 'property-info' );
+		add_settings_section( 'prop-contact-section', 'Property Information' , array( $this, 'contact_section_callback'), 'property-info' );
 		
 		add_settings_field('prop-addr-ln-one', 'Address Line 1', array($this, 'addr_ln_one_callback' ), 'property-info', 'prop-contact-section' );
 		
@@ -277,6 +277,10 @@ class PropertyInfo {
 		add_settings_field('prop-fax', 'Fax #', array($this, 'fax_callback' ), 'property-info', 'prop-contact-section' );
 		
 		add_settings_field('prop-google-map-url', 'Google Map URL', array($this, 'google_map_url_callback'), 'property-info', 'prop-contact-section' );
+		
+		add_settings_field('prop-eho', 'Display Equal Housing?', array($this, 'display_equal_housing_callback'), 'property-info', 'prop-contact-section');
+		
+		add_settings_field('prop-handicap', 'Display Handicap Accessible icon?', array($this, 'display_handicap_callback'), 'property-info', 'prop-contact-section');
 			
 		
 		
@@ -396,7 +400,7 @@ class PropertyInfo {
 	 }
 	
 	/**
-	 * Callback To Store The Property code
+	 * Callback To Store The Google Maps URL
 	 *
 	 * @since    1.0.0
 	 */			
@@ -406,7 +410,31 @@ class PropertyInfo {
         $gMap = esc_attr( $settings['prop-google-map-url'] );
 		echo "<input type='text' name='prop-contact-info[prop-google-map-url]' value='$gMap' />";	
 	}	
+
+	/**
+	 * Callback To Store the check value for displaying the EHO icon
+	 *
+	 * @since    1.0.0
+	 */			
+	public function display_equal_housing_callback() {
+		
+		$settings = (array) get_option( 'prop-contact-info' );
+        $eho = esc_attr( $settings['prop-eho'] );
+		echo "<input type='checkbox' name='prop-contact-info[prop-eho]' value='1'". checked( 1, $settings['prop-eho'], false )."  />";	
+	}	
 	
+	/**
+	 * Callback To Store the check value for displaying the handicap accessible icon
+	 *
+	 * @since    1.0.0
+	 */			
+	public function display_handicap_callback() {
+		
+		$settings = (array) get_option( 'prop-contact-info' );
+        $handicap = esc_attr( $settings['prop-handicap'] );
+		echo "<input type='checkbox' name='prop-contact-info[prop-handicap]' value='1'". checked( 1, $settings['prop-handicap'], false )."  />";	
+	}		
+
 
 	/**
 	 * Displays the form for the Property Information
