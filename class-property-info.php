@@ -301,7 +301,7 @@ class PropertyInfo {
 	 * @since    1.0.0
 	 */
 	public function contact_section_callback() {
-		echo 'Please fill in the property contact information below.';
+		echo 'Please fill in the property information below.';
 	}	
 	
 	
