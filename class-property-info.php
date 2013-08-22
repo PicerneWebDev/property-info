@@ -387,10 +387,9 @@ class PropertyInfo {
 	}	
 	
 	/**
+	 * Call Back for the Fax # input
 	 *
-	 *
-	 *
-	 * @somce 1.0.0
+	 * @since 1.0.0
 	 */
 	 public function fax_callback(){
 
@@ -414,7 +413,7 @@ class PropertyInfo {
 	/**
 	 * Callback To Store the check value for displaying the EHO icon
 	 *
-	 * @since    1.0.0
+	 * @since    1.0.1
 	 */			
 	public function display_equal_housing_callback() {
 		
@@ -426,7 +425,7 @@ class PropertyInfo {
 	/**
 	 * Callback To Store the check value for displaying the handicap accessible icon
 	 *
-	 * @since    1.0.0
+	 * @since    1.0.1
 	 */			
 	public function display_handicap_callback() {
 		
